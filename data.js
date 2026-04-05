@@ -1,0 +1,191 @@
+const brandConfig = {
+  name: 'Streak egy',
+  email: 'streak@gmail.com',
+  whatsappNumber: '201551137890',
+  whatsappMessage: 'Hi Streak egy! I want to order: ',
+  slogan: {
+    en: 'Imagine wearing what makes you feel unstoppable.',
+    ar: 'تخيل ارتداء ما يجعلك تشعر بأنك لا تقهر.'
+  },
+  mission: {
+    en: 'Our mission is to turn every day\'s clothing into a reminder that you can begin again, comeback stronger, protect the flame, and never under any circumstances let your streak die.',
+    ar: 'مهمتنا هي تحويل ملابس كل يوم إلى تذكير بأنه يمكنك البدء من جديد، والعودة أقوى، وحماية الشعلة، وعدم السماح لنجاحك بالتوقف تحت أي ظرف من الظروف.'
+  },
+  social: {
+    instagram: 'https://instagram.com/streak.egy',
+    facebook: 'https://facebook.com/streak.egy',
+    youtube: 'https://youtube.com/@streak.egy',
+  },
+  ui: {
+    home: { en: 'Home', ar: 'الرئيسية' },
+    shop: { en: 'Shop', ar: 'المتجر' },
+    about: { en: 'About', ar: 'عن ستريك' },
+    contact: { en: 'Contact', ar: 'اتصل بنا' },
+    explore: { en: 'Explore Collection', ar: 'استكشف المجموعة' },
+    mission_btn: { en: 'Our Mission', ar: 'مهمتنا' },
+    collections: { en: 'Collections', ar: 'المجموعات' },
+    best_sellers: { en: 'Best Sellers', ar: 'الأكثر مبيعاً' },
+    add_to_cart: { en: 'Add to Gear Bag', ar: 'أضف إلى حقيبتك' },
+    checkout: { en: 'Checkout via WhatsApp', ar: 'الدفع عبر واتساب' },
+    total: { en: 'Total', ar: 'الإجمالي' },
+    empty_cart: { en: 'Your gear bag is empty.', ar: 'حقيبة ملابسك فارغة.' },
+    search: { en: 'Search products...', ar: 'ابحث عن المنتجات...' },
+    all_products: { en: 'All Products', ar: 'كل المنتجات' },
+    your_gear: { en: 'Your Gear', ar: 'حقيبتك' },
+    start_shopping: { en: 'Start Shopping', ar: 'ابدأ التسوق' },
+    shipping_msg: { en: 'Calculated at checkout', ar: 'يتم حسابه عند الدفع' },
+    subtotal: { en: 'Subtotal', ar: 'الإجمالي الفرعي' }
+  },
+  features: [
+    {
+      icon: 'award',
+      title: { en: 'Elite Craftsmanship', ar: 'حرفية عالية' },
+      desc: { en: 'Engineered with premium materials designed to survive your sessions.', ar: 'مصمم بمواد ممتازة لتدوم خلال تمارينك الشاقة.' }
+    },
+    {
+      icon: 'zap',
+      title: { en: 'Aero-Dynamic Fit', ar: 'مقاس انسيابي' },
+      desc: { en: 'Zero-distraction fit that moves with you.', ar: 'مقاس مريح يتحرك معك دون أي تشتيت.' }
+    },
+    {
+      icon: 'shield-check',
+      title: { en: 'Streak Promise', ar: 'وعد ستريك' },
+      desc: { en: '30-day hassle-free returns.', ar: 'إرجاع سهل خلال 30 يوماً.' }
+    }
+  ],
+  about: {
+    hero_title: { en: 'Built for Comebacks.', ar: 'بنيت للعودة.' },
+    hero_subtitle: { en: 'Designed for Champions.', ar: 'صممت للأبطال.' },
+    hero_desc: { en: 'Streak egy is more than just sports clothing. It is a mindset. A reminder that every day is a new opportunity to start fresh, push harder, and become better than yesterday.', ar: 'ستريك إيجي هي أكثر من مجرد ملابس رياضية. إنها عقلية. تذكير بأن كل يوم هو فرصة جديدة للبدء من جديد، والضغط بقوة أكبر، وتصبح أفضل من الأمس.' },
+    story_title: { en: 'From Passion to Purpose', ar: 'من الشغف إلى الهدف' },
+    story_p1: { en: 'Streak egy was founded with a simple belief: every athlete deserves clothing that matches their dedication. What started as a small project in Cairo has grown into a brand trusted by athletes across Egypt.', ar: 'تأسست شركة ستريك إيجي بإيمان بسيط: كل رياضي يستحق ملابس تناسب تفانيه. ما بدأ كمشروع صغير في القاهرة نما ليصبح علامة تجارية يثق بها الرياضيون في جميع أنحاء مصر.' },
+    story_p2: { en: 'Our name represents the streak of victories, big and small, that every athlete chases. The flame in our logo symbolizes the fire within - the drive that pushes you to train harder, run faster, and never give up.', ar: 'يمثل اسمنا سلسلة الانتصارات، الكبيرة والصغيرة، التي يطاردها كل رياضي. ترمز الشعلة في شعارنا إلى النار في الداخل - الدافع الذي يدفعك للتدريب بجدية أكبر، والجري بشكل أسرع، وعدم الاستسلام أبداً.' },
+    story_p3: { en: 'Every piece we create is designed to be more than just clothing. It is a reminder of your commitment, a companion in your journey, and a celebration of your progress.', ar: 'كل قطعة نصنعها مصممة لتكون أكثر من مجرد ملابس. إنها تذكير بالتزامك، ورفيق في رحلتك، واحتفال بتقدمك.' }
+  }
+};
+
+const categories = [
+  {
+    id: 'hoodies',
+    label: 'Hoodies & Sweats',
+    labelAr: 'هوديز وملابس سويت',
+    image: 'https://images.unsplash.com/photo-1556821840-3a63f95609a7?w=600&h=750&fit=crop',
+  },
+  {
+    id: 'tees',
+    label: 'Performance Tees',
+    labelAr: 'تيشيرتات أداء',
+    image: 'https://images.unsplash.com/photo-1521572163474-6864f9cf17ab?w=600&h=750&fit=crop',
+  },
+  {
+    id: 'bottoms',
+    label: 'Shorts & Joggers',
+    labelAr: 'شورت وبناطيل رياضية',
+    image: 'https://images.unsplash.com/photo-1591195853828-11db59a44f6b?w=600&h=750&fit=crop',
+  },
+  {
+    id: 'outer',
+    label: 'Jackets & Layers',
+    labelAr: 'جاكيتات وطبقات',
+    image: 'https://images.unsplash.com/photo-1544022613-e87ca75a784a?w=600&h=750&fit=crop',
+  },
+];
+
+const products = [
+  {
+    id: 'hood-1',
+    name: 'Ignite Pullover Hoodie',
+    nameAr: 'هودي إجنايت',
+    price: 1290,
+    priceLabel: 'LE 1,290',
+    image: 'https://images.unsplash.com/photo-1556821840-3a63f95609a7?w=600&h=750&fit=crop',
+    category: 'hoodies',
+    description: 'Heavyweight fleece with a structured hood and reinforced seams. Built for warm-ups, late sessions, and the walk home.',
+    descriptionAr: 'صوف ثقيل الوزن مع غطاء رأس منظم وطبقات مقواة. مصمم للإحماء والجلسات المتأخرة والعودة للمنزل.',
+    badge: 'bestseller',
+    rating: 4.9,
+    reviews: 128,
+    colors: ['Black', 'Gray', 'Navy'],
+    sizes: ['S', 'M', 'L', 'XL', 'XXL'],
+  },
+  {
+    id: 'hood-2',
+    name: 'Trackside Zip Hoodie',
+    nameAr: 'هودي تراك سايد بسحاب',
+    price: 1450,
+    priceLabel: 'LE 1,450',
+    image: 'https://images.unsplash.com/photo-1620799140408-ed534f1d5a7e?w=600&h=750&fit=crop',
+    category: 'hoodies',
+    description: 'Full-zip layer you can peel off as intensity climbs. Tapered sleeves stay out of the way.',
+    descriptionAr: 'طبقة بسحاب كامل يمكنك خلعها مع زيادة الكثافة. أكمام مدببة تبقى بعيداً عن الطريق.',
+    badge: 'new',
+    rating: 4.8,
+    reviews: 86,
+    colors: ['Black', 'Charcoal'],
+    sizes: ['S', 'M', 'L', 'XL'],
+  },
+  {
+    id: 'tee-1',
+    name: 'Streak Pro Dri Tee',
+    nameAr: 'تيشيرت ستريك برو دراي',
+    price: 620,
+    priceLabel: 'LE 620',
+    image: 'https://images.unsplash.com/photo-1521572163474-6864f9cf17ab?w=600&h=750&fit=crop',
+    category: 'tees',
+    description: 'Lightweight knit with mechanical stretch. The shirt you grab when the session is non-negotiable.',
+    descriptionAr: 'نسيج خفيف الوزن مع تمدد ميكانيكي. التيشيرت الذي تختاره عندما تكون الجلسة غير قابلة للتفاوض.',
+    badge: 'bestseller',
+    rating: 4.8,
+    reviews: 215,
+    colors: ['Black', 'White', 'Navy', 'Red'],
+    sizes: ['S', 'M', 'L', 'XL', 'XXL'],
+  },
+  {
+    id: 'bot-1',
+    name: 'Velocity Training Shorts',
+    nameAr: 'شورت فيلوسيتي للتمارين',
+    price: 720,
+    priceLabel: 'LE 720',
+    image: 'https://images.unsplash.com/photo-1591195853828-11db59a44f6b?w=600&h=750&fit=crop',
+    category: 'bottoms',
+    description: '7-inch inseam with liner option feel. Side venting keeps airflow honest.',
+    descriptionAr: 'طول 7 بوصات مع شعور بوجود بطانة. التهوية الجانبية تحافظ على تدفق الهواء بشكل طبيعي.',
+    badge: 'bestseller',
+    rating: 4.9,
+    reviews: 187,
+    colors: ['Black', 'Navy', 'Gray'],
+    sizes: ['S', 'M', 'L', 'XL', 'XXL'],
+  },
+  {
+    id: 'out-1',
+    name: 'Windbreak Streak Shell',
+    nameAr: 'جاكيت ستريك واقي من الرياح',
+    price: 1680,
+    priceLabel: 'LE 1,680',
+    image: 'https://images.unsplash.com/photo-1544022613-e87ca75a784a?w=600&h=750&fit=crop',
+    category: 'outer',
+    description: 'Packable shell that cuts gusts without muting mobility. Matte black with voltage yellow zips.',
+    descriptionAr: 'جاكيت قابل للطي يحمي من الرياح دون إعاقة الحركة. أسود مطفي مع سحابات صفراء زاهية.',
+    badge: 'bestseller',
+    rating: 4.8,
+    reviews: 67,
+    colors: ['Black'],
+    sizes: ['S', 'M', 'L', 'XL'],
+  },
+  {
+    id: 'acc-1',
+    name: 'Bolt Trucker Cap',
+    nameAr: 'كاب بولت تراكير',
+    price: 320,
+    priceLabel: 'LE 320',
+    image: 'https://images.unsplash.com/photo-1588850561407-ed78c282e89b?w=600&h=750&fit=crop',
+    category: 'accessories',
+    description: 'Classic mesh back with structured front panel and embroidered Streak bolt.',
+    descriptionAr: 'ظهر شبكي كلاسيكي مع لوحة أمامية منظمة وتطريز شعار ستريك.',
+    badge: 'bestseller',
+    rating: 4.9,
+    reviews: 312,
+    colors: ['Black', 'Navy', 'White'],
+    sizes: ['One Size'],
+  }
+];

@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="en" x-data="contactApp()" :dir="language === 'ar' ? 'rtl' : 'ltr'">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact | Streak egy</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Cairo:wght@400;600;700;800&family=Outfit:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: { sans: ['Outfit', 'sans-serif'], bebas: ['Bebas Neue', 'sans-serif'], cairo: ['Cairo', 'sans-serif'] },
+                    colors: { primary: '#FFD700', dark: '#1a1a1a' }
+                }
+            }
+        }
+    </script>
+    <style type="text/tailwindcss">
+        @layer components {
+            .nav-link { @apply text-sm font-semibold uppercase tracking-widest transition-colors duration-300; }
+        }
+        [dir="rtl"] { font-family: 'Cairo', sans-serif; }
+        i[data-lucide] { display: inline-block; }
+    </style>
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <script defer src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js"></script>
+</head>
+<body class="bg-white text-dark font-sans overflow-x-hidden pt-28">
+    <!-- Nav -->
+    <nav class="fixed top-0 left-0 right-0 z-50 bg-white/95 backdrop-blur-xl py-3 border-b border-gray-100 shadow-sm text-dark">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-between">
+            <a href="index.html" class="flex items-center gap-3 group">
+                <div class="relative">
+                    <div class="w-12 h-12 bg-white border-2 border-primary rounded-xl flex items-center justify-center shadow-sm group-hover:bg-primary transition-all duration-500 overflow-hidden">
+                        <img src="logo.png" class="w-9 h-9 object-contain">
+                    </div>
+                    <div class="absolute -bottom-1 -right-1 w-5 h-5 bg-white rounded-full flex items-center justify-center shadow-sm border border-gray-100">
+                        <i data-lucide="zap" class="w-3 h-3 text-primary fill-primary"></i>
+                    </div>
+                </div>
+                <div class="flex flex-col">
+                    <span class="text-2xl font-bebas tracking-wider leading-none">STREAK <span class="text-primary">EGY</span></span>
+                    <span class="text-[8px] uppercase tracking-[0.3em] font-bold text-gray-400" x-text="language === 'ar' ? 'أداء نخبوي' : 'Elite Performance'"></span>
+                </div>
+            </a>
+            <div class="hidden lg:flex items-center gap-10">
+                <a href="index.html" class="nav-link hover:text-primary" x-text="brandConfig.ui.home[language]"></a>
+                <a href="shop.html" class="nav-link hover:text-primary" x-text="brandConfig.ui.shop[language]"></a>
+                <a href="about.html" class="nav-link hover:text-primary" x-text="brandConfig.ui.about[language]"></a>
+                <a href="contact.html" class="nav-link text-primary" x-text="brandConfig.ui.contact[language]"></a>
+            </div>
+            <div class="flex items-center gap-4">
+                <button @click="toggleLanguage()" class="w-11 h-11 rounded-full border border-gray-200 flex items-center justify-center hover:bg-primary transition-all">
+                    <span class="text-xs font-bold" x-text="language === 'en' ? 'AR' : 'EN'"></span>
+                </button>
+                <button @click="cartOpen = true" class="relative w-11 h-11 rounded-full border border-gray-200 flex items-center justify-center hover:bg-primary transition-all group">
+                    <i data-lucide="shopping-cart" class="w-5 h-5"></i>
+                    <span x-show="cartCount > 0" x-text="cartCount" class="absolute -top-1 -right-1 w-5 h-5 bg-primary text-black text-[10px] font-bold rounded-full flex items-center justify-center border-2 border-white"></span>
+                </button>
+                <button @click="mobileMenuOpen = !mobileMenuOpen" class="lg:hidden w-11 h-11 rounded-full border border-gray-200 flex items-center justify-center">
+                    <i data-lucide="menu" x-show="!mobileMenuOpen" class="w-5 h-5"></i>
+                    <i data-lucide="x" x-show="mobileMenuOpen" class="w-5 h-5"></i>
+                </button>
+            </div>
+        </div>
+        <!-- Mobile Menu -->
+        <div x-show="mobileMenuOpen" x-cloak class="lg:hidden bg-white text-dark border-t shadow-2xl overflow-hidden">
+            <div class="p-6 space-y-4">
+                <a href="index.html" class="flex items-center justify-between p-4 rounded-2xl hover:bg-gray-50 font-bold text-xl transition-colors"><span x-text="brandConfig.ui.home[language]"></span><i data-lucide="home" class="w-5 h-5 text-primary"></i></a>
+                <a href="shop.html" class="flex items-center justify-between p-4 rounded-2xl hover:bg-gray-50 font-bold text-xl transition-colors"><span x-text="brandConfig.ui.shop[language]"></span><i data-lucide="shopping-bag" class="w-5 h-5 text-primary"></i></a>
+                <a href="about.html" class="flex items-center justify-between p-4 rounded-2xl hover:bg-gray-50 font-bold text-xl transition-colors"><span x-text="brandConfig.ui.about[language]"></span><i data-lucide="info" class="w-5 h-5 text-primary"></i></a>
+                <a href="contact.html" class="flex items-center justify-between p-4 rounded-2xl bg-gray-50 text-primary font-bold text-xl transition-colors"><span x-text="brandConfig.ui.contact[language]"></span><i data-lucide="phone" class="w-5 h-5 text-primary"></i></a>
+            </div>
+            <div class="p-8 bg-gray-50 flex justify-center gap-8">
+                <a :href="brandConfig.social.instagram" target="_blank"><i data-lucide="instagram" class="w-6 h-6 text-dark"></i></a>
+                <a :href="'https://wa.me/' + brandConfig.whatsappNumber" target="_blank"><i data-lucide="message-circle" class="w-6 h-6 text-green-500"></i></a>
+                <a :href="brandConfig.social.facebook" target="_blank"><i data-lucide="facebook" class="w-6 h-6 text-blue-600"></i></a>
+            </div>
+        </div>
+    </nav>
+
+    <main class="relative z-10 max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-20 text-center">
+        <h1 class="text-6xl lg:text-8xl font-bold mb-8 text-dark" x-text="brandConfig.ui.contact[language]"></h1>
+        <p class="text-xl text-gray-500 mb-20 max-w-2xl mx-auto" x-text="language === 'ar' ? 'لديك استفسار؟ نحن هنا للمساعدة.' : 'Have a question? We are here to help.'"></p>
+        
+        <div class="grid md:grid-cols-2 gap-10 text-left">
+            <a :href="'https://wa.me/' + brandConfig.whatsappNumber" target="_blank" class="p-12 bg-gray-50 rounded-[3rem] border border-gray-100 hover:border-primary transition-all group shadow-sm hover:shadow-2xl">
+                <div class="w-20 h-20 bg-green-500 rounded-[2rem] flex items-center justify-center text-white mb-10 shadow-lg"><i data-lucide="message-circle" class="w-10 h-10"></i></div>
+                <h3 class="text-3xl font-bold mb-4 text-dark">WhatsApp</h3>
+                <p class="text-gray-500 mb-8 text-lg" x-text="language === 'ar' ? 'استجابة سريعة لطلباتك.' : 'Instant response for your orders.'"></p>
+                <span class="text-green-600 font-bold text-xl" x-text="'+' + brandConfig.whatsappNumber.replace(/(\d{2})(\d{3})(\d{3})(\d{4})/, '$1 $2 $3 $4')"></span>
+            </a>
+            
+            <a href="mailto:streak@gmail.com" class="p-12 bg-gray-50 rounded-[3rem] border border-gray-100 hover:border-primary transition-all group shadow-sm hover:shadow-2xl">
+                <div class="w-20 h-20 bg-primary rounded-[2rem] flex items-center justify-center text-black mb-10 shadow-lg"><i data-lucide="mail" class="w-10 h-10"></i></div>
+                <h3 class="text-3xl font-bold mb-4 text-dark">Email</h3>
+                <p class="text-gray-500 mb-8 text-lg" x-text="language === 'ar' ? 'للاستفسارات العامة والتعاون.' : 'For general inquiries and collabs.'"></p>
+                <span class="text-dark font-bold text-xl">streak@gmail.com</span>
+            </a>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-[#1a1a1a] text-white pt-24 pb-12 relative overflow-hidden">
+        <div class="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-transparent via-primary to-transparent opacity-20"></div>
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-5 gap-12 mb-20">
+                <div class="col-span-2 md:col-span-4 lg:col-span-2">
+                    <div class="bg-white rounded-xl p-3 inline-block mb-6 shadow-lg">
+                        <img src="logo.png" class="h-12 w-auto object-contain">
+                    </div>
+                    <p class="text-white/60 text-sm mb-8 max-w-xs leading-relaxed" x-text="brandConfig.mission[language]"></p>
+                    <div class="space-y-4">
+                        <a :href="'mailto:' + brandConfig.email" class="flex items-center gap-3 text-white/60 hover:text-primary transition-colors text-sm font-semibold"><i data-lucide="mail" class="w-4 h-4"></i> <span x-text="brandConfig.email"></span></a>
+                        <a :href="'https://wa.me/' + brandConfig.whatsappNumber" target="_blank" class="flex items-center gap-3 text-white/60 hover:text-primary transition-colors text-sm font-semibold"><i data-lucide="message-circle" class="w-4 h-4 text-green-500"></i> <span>WhatsApp Support</span></a>
+                    </div>
+                </div>
+                <div>
+                    <h4 class="text-white font-bold mb-6 uppercase tracking-widest text-xs text-primary" x-text="brandConfig.ui.shop[language]"></h4>
+                    <ul class="space-y-4 text-white/40 text-sm font-semibold">
+                        <li><a href="shop.html" class="hover:text-primary transition-colors" x-text="brandConfig.ui.all_products[language]"></a></li>
+                        <li><a href="shop.html" class="hover:text-primary transition-colors" x-text="brandConfig.ui.best_sellers[language]"></a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="text-white font-bold mb-6 uppercase tracking-widest text-xs text-primary" x-text="language === 'ar' ? 'الشركة' : 'Company'"></h4>
+                    <ul class="space-y-4 text-white/40 text-sm font-semibold">
+                        <li><a href="about.html" class="hover:text-primary transition-colors" x-text="brandConfig.ui.about[language]"></a></li>
+                        <li><a href="contact.html" class="hover:text-primary transition-colors" x-text="brandConfig.ui.contact[language]"></a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="text-white font-bold mb-6 uppercase tracking-widest text-xs text-primary" x-text="language === 'ar' ? 'الدعم' : 'Support'"></h4>
+                    <ul class="space-y-4 text-white/40 text-sm font-semibold">
+                        <li><a href="contact.html" class="hover:text-primary transition-colors">Shipping Info</a></li>
+                        <li><a href="contact.html" class="hover:text-primary transition-colors">Returns</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="border-t border-white/5 pt-10 flex flex-col md:flex-row justify-between items-center gap-8">
+                <p class="text-white/20 text-[10px] uppercase tracking-widest font-bold">&copy; 2026 STREAK EGY. All rights reserved.</p>
+                <div class="flex items-center gap-4">
+                    <a :href="brandConfig.social.instagram" target="_blank" class="w-10 h-10 bg-white/5 rounded-full flex items-center justify-center text-white/40 hover:bg-primary transition-all"><i data-lucide="instagram" class="w-5 h-5"></i></a>
+                    <a :href="brandConfig.social.facebook" target="_blank" class="w-10 h-10 bg-white/5 rounded-full flex items-center justify-center text-white/40 hover:bg-primary transition-all"><i data-lucide="facebook" class="w-5 h-5"></i></a>
+                    <a :href="brandConfig.social.youtube" target="_blank" class="w-10 h-10 bg-white/5 rounded-full flex items-center justify-center text-white/40 hover:bg-primary transition-all"><i data-lucide="youtube" class="w-5 h-5"></i></a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="data.js"></script>
+    <script>
+        function contactApp() {
+            return {
+                language: localStorage.getItem('lang') || 'en',
+                cartOpen: false,
+                mobileMenuOpen: false,
+                cart: JSON.parse(localStorage.getItem('cart') || '[]'),
+                brandConfig: brandConfig,
+                init() {
+                    this.$watch('cart', val => { localStorage.setItem('cart', JSON.stringify(val)); this.updateLucide(); });
+                    this.$watch('language', () => this.updateLucide());
+                    this.$watch('mobileMenuOpen', () => this.updateLucide());
+                    this.updateLucide();
+                },
+                toggleLanguage() { this.language = this.language === 'en' ? 'ar' : 'en'; localStorage.setItem('lang', this.language); },
+                get cartCount() { return this.cart.reduce((sum, item) => sum + item.quantity, 0); },
+                get cartTotal() { return this.cart.reduce((sum, item) => sum + (item.price * item.quantity), 0); },
+                updateQuantity(item, delta) {
+                    const found = this.cart.find(i => i.id === item.id && i.color === item.color && i.size === item.size);
+                    if (found) { found.quantity += delta; if (found.quantity <= 0) this.cart = this.cart.filter(i => i !== found); }
+                    this.updateLucide();
+                },
+                checkout() {
+                    let msg = `${this.brandConfig.whatsappMessage}\n\n`;
+                    this.cart.forEach(i => msg += `- ${this.language === 'ar' ? i.nameAr : i.name} (${i.color}, ${i.size}) x${i.quantity}\n`);
+                    msg += `\nTotal: LE ${this.cartTotal.toLocaleString()}`;
+                    window.open(`https://wa.me/${this.brandConfig.whatsappNumber}?text=${encodeURIComponent(msg)}`, '_blank');
+                },
+                updateLucide() { this.$nextTick(() => { if (window.lucide) lucide.createIcons(); }); }
+            }
+        }
+    </script>
+</body>
+</html>
